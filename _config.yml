@@ -18,14 +18,20 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: mkmake
+title: ""
+name: "mkmake"
+logo: assets/img/logo.png
+avatar: assets/img/logo.png
+theme_settings:
+  avatar: assets/img/logo.png
 email: contact@mkmake.hu
-description: >- # this means to ignore newlines until "baseurl:"
+description:
   Making is living, Portfolio and Webshop
+favicon: "assets/img/favicon.png"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "https://mkmake.hu" # the base hostname & protocol for your site, e.g. http://example.com
+#twitter_username: jekyllrb
+#github_username:  jekyll
 
 # Build settings
 #theme: type-on-strap
@@ -37,11 +43,17 @@ plugins:
 
 # Pagination (Crucial for Type on Strap)
 paginate: 5
-paginate_path: "/blog/page:num/"
+# paginate_path: "/blog/page:num/"
+
+# Navigation Order
+header_pages:
+  - shop/index.md
+  - workshop.md
+  - zaboutus.md
 
 # The URL fix we discussed
-baseurl: ""  # Change this from "/mkmake" to an empty string
-url: "https://mkmake.hu"
+# baseurl: ""  # Change this from "/mkmake" to an empty string
+# url: "https://mkmake.hu"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
