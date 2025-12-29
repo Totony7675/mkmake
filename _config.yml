@@ -21,6 +21,9 @@
 title: ""
 name: "mkmake"
 logo: assets/img/logo.png
+header_text: "Modern Craftsmanship"
+subtitle: "Where woodturning meets 3D printing. Available for purchase."
+header_feature_image: "assets/img/home-bg.jpg"
 avatar: assets/img/logo.png
 theme_settings:
   avatar: assets/img/logo.png
