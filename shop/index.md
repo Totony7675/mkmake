@@ -5,8 +5,6 @@ permalink: /shop/
 tags: [shop, products]
 ---
 
-## Handcrafted with Passion
+## Crafted with Passion
 
-Welcome to our shop. Here you will find bespoke items crafted from our homestead's resources.
-
-(Product Grid Placeholder)
+Welcome to our shop. Here you will soon find bespoke items crafted with passion.
