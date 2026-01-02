@@ -43,6 +43,12 @@ plugins:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-paginate
+  - jekyll-polyglot
+
+languages: ["en", "hu"]
+default_lang: "hu"
+exclude_from_localization: ["assets", "Gemfile", "Gemfile.lock", "_site", "node_modules", "vendor"]
+parallel_localization: false
 
 # Pagination (Crucial for Type on Strap)
 paginate: 5
@@ -51,8 +57,11 @@ paginate: 5
 # Navigation Order
 header_pages:
   - shop/index.md
+  - shop/index.en.md
   - workshop.md
+  - workshop.en.md
   - zaboutus.md
+  - zaboutus.en.md
 
 # The URL fix we discussed
 # baseurl: ""  # Change this from "/mkmake" to an empty string

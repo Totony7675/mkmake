@@ -1,10 +1,11 @@
 ---
 layout: page
-title: Shop
+title: Bolt
 permalink: /shop/
+lang: hu
 tags: [shop, products]
 ---
 
-## Crafted with Passion
+## Szenvedéllyel készítve
 
-Welcome to our shop. Here you will soon find bespoke items crafted with passion.
+Üdvözlünk a boltunkban. Itt hamarosan szenvedéllyel készített, egyedi tárgyakat találsz majd.

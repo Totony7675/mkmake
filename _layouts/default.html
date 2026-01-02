@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=5">
+    
+    <!-- Theme Mode Script -->
+    <script>
+        const darkBtn = "Dark"; const lightBtn = "Light"; const isAutoTheme = false; 
+        const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; 
+        if (isAutoTheme) { document.documentElement.setAttribute('data-theme', sessionStorage.getItem('theme') ?? preferredTheme); } 
+        else { document.documentElement.setAttribute('data-theme', "light"); } 
+    </script>
+
+    <!-- Main JS -->
+    <script defer src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ '/assets/img/favicon.png' | relative_url }}" type="image/x-icon">
+    
+    <!-- Search -->
+    <script src="{{ '/assets/js/vendor/simple-jekyll-search.min.js' | relative_url }}" type="text/javascript"></script>
+
+    {% seo %}
+  </head>
+  <body>
+    {% include header.html %}
+    
+    <div class="content">
+      {{ content }}
+    </div>
+    
+    <footer class="site-footer">
+        <p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a></p>
+        <div class="footer-icons">
+            <ul>
+                <!-- Social icons would go here -->
+            </ul>
+        </div>
+    </footer>
+  </body>
+</html>

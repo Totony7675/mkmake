@@ -1,0 +1,98 @@
+<style>
+    /* Force Nav to be one line using Flexbox */
+    .site-header nav ul { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; 
+        align-items: center !important; 
+        white-space: nowrap !important;
+        justify-content: flex-end; /* Align right */
+    }
+    
+    /* Compact items */
+    .site-header nav li { 
+        padding: 0 4px !important; 
+        margin: 0 !important;
+    }
+    
+    /* Separators */
+    .site-header nav li.separator { 
+        padding: 0 2px !important; 
+    }
+
+    /* General Labels - Increased Size (Intermediate) */
+    .navbar-label { font-size: 16px !important; }
+
+    /* Language Switcher Specifics */
+    .lang-switch-item {
+        font-size: 12px !important; 
+        margin-left: 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        border-left: 1px solid #ccc; /* Use border instead of | separator for cleaner look */
+        padding-left: 8px !important;
+    }
+    .lang-switch-item .navbar-label {
+        font-size: 12px !important; /* Keep switcher small */
+    }
+</style>
+
+<header class="site-header">
+  <!-- BRANDING: LOGO ONLY -->
+  <div class="branding">
+    <a href="{{ '/' | relative_url }}">
+      {% assign logo_path = site.logo | default: site.avatar | default: site.theme_settings.avatar %}
+      {% if logo_path %}
+        <img class="avatar" src="{{ logo_path | relative_url }}" alt="{{ site.title }}" style="height: 80px; width: auto; vertical-align: middle;"/>
+      {% else %}
+        <h1 class="site-title">{{ site.title }}</h1>
+      {% endif %}
+    </a>
+  </div>
+
+  <!-- TOGGLE MENU (Mobile) -->
+  <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+      <i class="fas fa-bars fa-lg"></i>
+    </a>
+
+    <!-- MENU ITEMS -->
+    <ul class="hide">
+      
+      <!-- DYNAMIC PAGES FROM CONFIG -->
+      {% if site.header_pages %}
+        {% for path in site.header_pages %}
+          {% assign my_page = site.pages | where: "path", path | first %}
+          {% if my_page.title %}
+            <!-- Only show separator if not the very first item -->
+            {% unless forloop.first %}<li class="separator"> | </li>{% endunless %}
+            <li>
+              <a class="clear" aria-label="{{ my_page.title }}" title="{{ my_page.title }}" href="{{ my_page.url | relative_url }}">
+                <span class="navbar-label ">{{ my_page.title }}</span>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- HARDCODED LANGUAGE SWITCHER (HU/EN) WITH JS TO BYPASS REWRITE -->
+      <!-- Added class lang-switch-item for specific styling -->
+      <li class="lang-switch-item">
+          {% assign raw_url = page.url %}
+          {% assign clean_url = raw_url | replace_first: "/en/", "/" | replace: "//", "/" %}
+          
+          {% if site.active_lang == "hu" %}
+              <!-- Current: HU -->
+              <span class="navbar-label" style="font-weight: bold; cursor: default;">HU</span>
+              <span style="opacity:0.5; margin: 0 2px;">/</span>
+              <a class="clear" href="javascript:void(0);" onclick="window.location.href='{{ site.url }}/en{{ clean_url }}';"><span class="navbar-label">EN</span></a>
+          {% else %}
+              <!-- Current: EN -->
+              <a class="clear" href="javascript:void(0);" onclick="window.location.href='{{ site.url }}{{ clean_url }}';"><span class="navbar-label">HU</span></a>
+              <span style="opacity:0.5; margin: 0 2px;">/</span>
+              <span class="navbar-label" style="font-weight: bold; cursor: default;">EN</span>
+          {% endif %}
+      </li>
+      
+    </ul>
+  </nav>
+</header>
