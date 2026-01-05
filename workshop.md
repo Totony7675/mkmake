@@ -9,7 +9,7 @@ tags: [workshop, experiments, projects]
 
 ## Bepillantás a színfalak mögé
 
-Íme néhány kísérletünk, egyedi projektünk, felszerelésünk és kedvenc technikánk. Lényegében bármilyen "alkotói történetünk".
+Íme néhány kísérletünk, egyedi projektünk, felszerelésünk és kedvenc technikánk. Lényegében bármilyen "alkotói történetünk". 
 
 Alkotói tevékenységünk messze túlmutat "A" műhelyen. Mindenhol alkotunk: a konyhaasztalon, a hálószobában, a garázsban, a szabadban, és apa rendetlen asztalosműhelyében is. Kérlek, ne ítélj el a padlón lévő forgácsmennyiség miatt, vagy a mindenhol heverő fadarabok miatt, mert "egyszer még jók lehetnek valamire" (és tényleg, néha azok is!).
 
