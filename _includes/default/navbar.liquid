@@ -36,8 +36,7 @@
     }
 </style>
 
-<header class="site-header">
-  <!-- DEBUG MARKER: CUSTOM NAVBAR.LIQUID IS ACTIVE -->
+<header class="site-header" style="display: flex; align-items: center; justify-content: space-between;">
   <!-- BRANDING: LOGO ONLY -->
   <div class="branding">
     <a href="{{ '/' | relative_url }}">
@@ -50,14 +49,10 @@
     </a>
   </div>
 
-  <!-- TOGGLE MENU (Mobile) -->
+  <!-- NAV -->
   <nav class="clear" style="display: flex; align-items: center;">
-    {% include language-switch.html %}
-    <a aria-label="pull" id="pull" class="toggle" href="#">
-      <i class="fas fa-bars fa-lg"></i>
-    </a>
-
-    <!-- MENU ITEMS -->
+    
+    <!-- MENU ITEMS (First) -->
     <ul class="hide">
       
       <!-- DYNAMIC PAGES FROM CONFIG -->
@@ -81,5 +76,16 @@
       {% endif %}
       
     </ul>
+
+    <!-- LANGUAGE SWITCHER (Second) -->
+    <div style="margin-left: 15px;">
+        {% include language-switch.html %}
+    </div>
+
+    <!-- TOGGLE MENU (Mobile) -->
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+      <i class="fas fa-bars fa-lg"></i>
+    </a>
+
   </nav>
 </header>
