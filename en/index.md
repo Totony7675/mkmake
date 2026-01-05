@@ -1,8 +1,9 @@
 ---
 layout: home
 title: Home
-lang: hu
+lang: en
 translation_id: home
+permalink: /en/
 ---
 
-Üdvözlünk az MK Make oldalán!
+Welcome to MK Make!

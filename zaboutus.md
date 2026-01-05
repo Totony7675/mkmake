@@ -3,6 +3,7 @@ layout: page
 title: Rólunk
 permalink: /aboutus/
 lang: hu
+translation_id: about
 tags: [about, family, philosophy]
 ---
 

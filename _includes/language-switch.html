@@ -1,0 +1,24 @@
+<div class="lang-toggle" style="margin-right: 15px; display: flex; align-items: center;">
+  {% assign current_lang = page.lang | default: "hu" %}
+  {% assign versions = site.pages | concat: site.posts | where: "translation_id", page.translation_id %}
+  {% assign hu_page = versions | where: "lang", "hu" | first %}
+  {% assign en_page = versions | where: "lang", "en" | first %}
+
+  {% if current_lang == "hu" %}
+    <span class="navbar-label" style="font-weight: bold; cursor: default;">HU</span>
+    <span style="opacity:0.5; margin: 0 2px;">/</span>
+    {% if en_page %}
+      <a class="clear" href="{{ en_page.url | relative_url }}"><span class="navbar-label">EN</span></a>
+    {% else %}
+       <span class="navbar-label" style="opacity:0.5;">EN</span>
+    {% endif %}
+  {% else %}
+    {% if hu_page %}
+      <a class="clear" href="{{ hu_page.url | relative_url }}"><span class="navbar-label">HU</span></a>
+    {% else %}
+      <span class="navbar-label" style="opacity:0.5;">HU</span>
+    {% endif %}
+    <span style="opacity:0.5; margin: 0 2px;">/</span>
+    <span class="navbar-label" style="font-weight: bold; cursor: default;">EN</span>
+  {% endif %}
+</div>

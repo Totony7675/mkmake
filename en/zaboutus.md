@@ -1,8 +1,9 @@
 ---
 layout: page
 title: About Us
-permalink: /aboutus/
+permalink: /en/aboutus/
 lang: en
+translation_id: about
 tags: [about, family, philosophy]
 ---
 

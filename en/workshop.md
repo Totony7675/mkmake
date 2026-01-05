@@ -1,8 +1,9 @@
 ---
 layout: page
 title: Stories
-permalink: /stories/
+permalink: /en/stories/
 lang: en
+translation_id: workshop
 tags: [workshop, experiments, projects]
 ---
 

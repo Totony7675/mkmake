@@ -3,6 +3,7 @@ layout: page
 title: Történetek
 permalink: /stories/
 lang: hu
+translation_id: workshop
 tags: [workshop, experiments, projects]
 ---
 
