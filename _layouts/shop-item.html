@@ -1,0 +1,78 @@
+---
+layout: page
+---
+{% assign gallery = page.images %}
+{% unless gallery %}{% assign gallery = page.img | split: "," %}{% endunless %}
+{% if page.lang == "en" %}
+  {% assign label_meska = "Order on Meska" %}
+  {% assign label_contact = "Contact us" %}
+  {% assign label_prev = "Previous photo" %}
+  {% assign label_next = "Next photo" %}
+{% else %}
+  {% assign label_meska = "Megrendelés a Meskán" %}
+  {% assign label_contact = "Lépjen kapcsolatba velünk" %}
+  {% assign label_prev = "Előző fotó" %}
+  {% assign label_next = "Következő fotó" %}
+{% endif %}
+
+<style>
+.shop-carousel { position: relative; max-width: 720px; margin: 1rem auto; }
+.shop-carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.shop-carousel-track::-webkit-scrollbar { display: none; }
+.shop-carousel-slide { flex: 0 0 100%; width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: #f2f2f2; scroll-snap-align: center; }
+.shop-carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: rgba(0, 0, 0, 0.45); color: #fff; font-size: 1.25rem; line-height: 1; cursor: pointer; }
+.shop-carousel-btn:hover { background: rgba(0, 0, 0, 0.7); }
+.shop-carousel-prev { left: 0.5rem; }
+.shop-carousel-next { right: 0.5rem; }
+.shop-item-title { text-align: center; font-size: 1.25rem; font-weight: 600; }
+.shop-item-description { max-width: 720px; margin: 1.5rem auto; }
+.shop-order { text-align: center; margin: 2rem 0; }
+.shop-order-btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 4px; background: #222; color: #fff; font-weight: 600; text-decoration: none; }
+.shop-order-btn:hover { opacity: 0.85; color: #fff; text-decoration: none; }
+</style>
+
+<div class="shop-carousel">
+  <div class="shop-carousel-track">
+  {% for photo in gallery %}
+    <img class="shop-carousel-slide" src="{{ photo | relative_url }}" alt="{{ page.title | escape }} ({{ forloop.index }}/{{ gallery.size }})">
+  {% endfor %}
+  </div>
+  {% if gallery.size > 1 %}
+  <button type="button" class="shop-carousel-btn shop-carousel-prev" aria-label="{{ label_prev }}">&#10094;</button>
+  <button type="button" class="shop-carousel-btn shop-carousel-next" aria-label="{{ label_next }}">&#10095;</button>
+  {% endif %}
+</div>
+
+<p class="shop-item-title">{{ page.title }}</p>
+
+<div class="shop-item-description">
+{{ content }}
+</div>
+
+<p class="shop-order">
+{% if page.meska_url and page.meska_url != "" %}
+  <a class="shop-order-btn" href="{{ page.meska_url }}" target="_blank" rel="noopener">{{ label_meska }}</a>
+{% else %}
+  <a class="shop-order-btn" href="mailto:info@mkmake.hu?subject={{ page.title | uri_escape }}">{{ label_contact }}</a>
+{% endif %}
+</p>
+
+<script>
+(function () {
+  var box = document.querySelector('.shop-carousel');
+  if (!box) { return; }
+  var track = box.querySelector('.shop-carousel-track');
+  var prev = box.querySelector('.shop-carousel-prev');
+  var next = box.querySelector('.shop-carousel-next');
+  if (!track || !prev || !next) { return; }
+  function go(direction) {
+    var width = track.clientWidth;
+    var max = track.scrollWidth - width;
+    var x = track.scrollLeft + direction * width;
+    if (x < -1) { x = max; } else if (x > max + 1) { x = 0; }
+    track.scrollTo({ left: x });
+  }
+  prev.addEventListener('click', function () { go(-1); });
+  next.addEventListener('click', function () { go(1); });
+})();
+</script>

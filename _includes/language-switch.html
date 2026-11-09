@@ -1,6 +1,6 @@
 <div class="lang-toggle" style="margin-right: 15px; display: flex; align-items: center;">
   {% assign current_lang = page.lang | default: "hu" %}
-  {% assign versions = site.pages | concat: site.posts | where: "translation_id", page.translation_id %}
+  {% assign versions = site.pages | concat: site.documents | where: "translation_id", page.translation_id %}
   {% assign hu_page = versions | where: "lang", "hu" | first %}
   {% assign en_page = versions | where: "lang", "en" | first %}
 

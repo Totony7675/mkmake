@@ -1,0 +1,11 @@
+{% assign shop_items = site.portfolio | where: "lang", page.lang | sort: "order" %}
+<div class="portfolio-grid">
+{% for item in shop_items %}
+  <div class="portfolio-cell">
+    <a class="portfolio-link" href="{{ item.url | relative_url }}">
+      <img alt="{{ item.title | escape }}" src="{{ item.img | relative_url }}">
+      <span class="shop-title">{{ item.title }}</span>
+    </a>
+  </div>
+{% endfor %}
+</div>

@@ -56,3 +56,9 @@ header_pages:
   - en/workshop.md
   - zaboutus.md
   - en/zaboutus.md
+
+# PORTFOLIO (used as the shop)
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:name
