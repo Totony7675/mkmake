@@ -1,0 +1,94 @@
+{% if page.lang == "en" %}
+  {% assign t_name = "Name" %}
+  {% assign t_email = "Email" %}
+  {% assign t_message = "Message" %}
+  {% assign t_send = "Send" %}
+  {% assign t_item = "Item" %}
+  {% assign t_subject = "New message from the website" %}
+  {% assign t_sending = "Sending..." %}
+  {% assign t_success = "Thank you for your message! We will reply soon." %}
+  {% assign t_error = "Sorry, the message could not be sent. Please write to us directly: contact@mkmake.hu" %}
+  {% assign t_privacy = "By sending this message you agree that we use the data you give (name, email, message) to reply to you. The form is delivered by the service Web3Forms." %}
+{% else %}
+  {% assign t_name = "Név" %}
+  {% assign t_email = "E-mail" %}
+  {% assign t_message = "Üzenet" %}
+  {% assign t_send = "Küldés" %}
+  {% assign t_item = "Termék" %}
+  {% assign t_subject = "Új üzenet a weboldalról" %}
+  {% assign t_sending = "Küldés folyamatban..." %}
+  {% assign t_success = "Köszönjük az üzeneted! Hamarosan válaszolunk." %}
+  {% assign t_error = "Sajnos az üzenetet nem sikerült elküldeni. Kérjük, írj közvetlenül ide: contact@mkmake.hu" %}
+  {% assign t_privacy = "Az üzenet elküldésével hozzájárulsz, hogy a megadott adatokat (név, e-mail, üzenet) a válaszadás céljából kezeljük. Az űrlapot a Web3Forms szolgáltatás továbbítja." %}
+{% endif %}
+
+<style>
+.contact-form { max-width: 560px; margin: 1.5rem auto; }
+.contact-form label { display: block; font-weight: 600; margin-bottom: 1rem; }
+.contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { display: block; width: 100%; padding: 0.6rem; margin-top: 0.3rem; border: 1px solid #bbb; border-radius: 4px; font: inherit; font-weight: 400; box-sizing: border-box; }
+.contact-form button { padding: 0.8rem 2rem; border: 0; border-radius: 4px; background: #222; color: #fff; font-weight: 600; cursor: pointer; }
+.contact-form button:hover { opacity: 0.85; }
+.contact-form button:disabled { opacity: 0.5; cursor: default; }
+.contact-form .contact-item { font-weight: 600; }
+.contact-form .contact-privacy { font-size: 0.85rem; opacity: 0.8; }
+.contact-result { max-width: 560px; margin: 1.5rem auto; font-weight: 600; }
+.contact-ok { color: #1a7f37; }
+.contact-error { color: #b42318; }
+</style>
+
+<form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-item-label="{{ t_item }}" data-sending="{{ t_sending }}" data-success="{{ t_success }}" data-error="{{ t_error }}">
+  <input type="hidden" name="access_key" value="{{ site.web3forms_access_key }}">
+  <input type="hidden" name="subject" value="mkmake.hu - {{ t_subject }}">
+  <input type="hidden" name="from_name" value="mkmake.hu">
+  <input type="hidden" name="product" value="">
+  <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off">
+  <p class="contact-item" hidden></p>
+  <label>{{ t_name }}<input type="text" name="name" required></label>
+  <label>{{ t_email }}<input type="email" name="email" required></label>
+  <label>{{ t_message }}<textarea name="message" rows="6" required></textarea></label>
+  <p><button type="submit">{{ t_send }}</button></p>
+  <p class="contact-privacy">{{ t_privacy }}</p>
+</form>
+<p class="contact-result" role="status" hidden></p>
+
+<script>
+(function () {
+  var form = document.querySelector('.contact-form');
+  var result = document.querySelector('.contact-result');
+  if (!form || !result) { return; }
+  var button = form.querySelector('button[type=submit]');
+
+  var item = new URLSearchParams(window.location.search).get('item');
+  if (item) {
+    item = item.slice(0, 200);
+    form.querySelector('[name=product]').value = item;
+    form.querySelector('[name=subject]').value = 'mkmake.hu - ' + item;
+    var line = form.querySelector('.contact-item');
+    line.textContent = form.getAttribute('data-item-label') + ': ' + item;
+    line.hidden = false;
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var data = Object.fromEntries(new FormData(form));
+    button.disabled = true;
+    result.hidden = false;
+    result.className = 'contact-result';
+    result.textContent = form.getAttribute('data-sending');
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      if (response.status !== 200) { throw new Error('status ' + response.status); }
+      form.hidden = true;
+      result.className = 'contact-result contact-ok';
+      result.textContent = form.getAttribute('data-success');
+    }).catch(function () {
+      button.disabled = false;
+      result.className = 'contact-result contact-error';
+      result.textContent = form.getAttribute('data-error');
+    });
+  });
+})();
+</script>

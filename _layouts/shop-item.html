@@ -53,7 +53,8 @@ layout: page
 {% if page.meska_url and page.meska_url != "" %}
   <a class="shop-order-btn" href="{{ page.meska_url }}" target="_blank" rel="noopener">{{ label_meska }}</a>
 {% else %}
-  <a class="shop-order-btn" href="mailto:info@mkmake.hu?subject={{ page.title | uri_escape }}">{{ label_contact }}</a>
+  {% if page.lang == "en" %}{% assign contact_page = "/en/contact/" %}{% else %}{% assign contact_page = "/contact/" %}{% endif %}
+  <a class="shop-order-btn" href="{{ contact_page | relative_url }}?item={{ page.title | uri_escape }}">{{ label_contact }}</a>
 {% endif %}
 </p>
 
